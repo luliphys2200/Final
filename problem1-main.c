@@ -5,7 +5,7 @@
 
 double mc_se (long m, int n, gsl_rng *r);
 
-#define POINTS 1024       /* 2^19, initial number of random points to generate */
+#define POINTS 1024       /* 2^10, initial number of random points to generate */
 #define NEXP 64           /* number of experiments for each value of points */
 #define M 11              /* number of different points values */
 

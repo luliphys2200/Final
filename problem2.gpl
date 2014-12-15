@@ -1,7 +1,0 @@
-unset key
-set style data line
-
-set term png
-set o "problem2.png"
-
-p "problem2-res" u 1:2

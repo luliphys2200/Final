@@ -4,14 +4,21 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_odeiv2.h>
 
+#include <stdlib.h>
+
 int func (double tau, const double y[], double f[], void *params);
 
-int main (void)
+int main (int argc, char *argv[])
 {
+    if (argc != 2)
+    {
+        fprintf(stderr, "invalid arguments\n");
+        return 1;
+    }
     size_t neqs = 2;            /* number of equations */
     double eps_abs = 1.e-8, eps_rel = 0.;       /* desired precision */
     double stepsize = 1e-6;     /* initial integration step */
-    double omega = 144.;
+    double omega = (double) atoi(argv[1]);
     double t = 0., t1 = 100.;   /* time interval */
     int status;
     /*
