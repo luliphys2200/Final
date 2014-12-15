@@ -1,3 +1,6 @@
+/*
+ * print the results of the motion of a pendulum
+ */
 #include <stdio.h>
 #include <math.h>
 
@@ -15,11 +18,11 @@ int main (int argc, char *argv[])
         fprintf(stderr, "invalid arguments\n");
         return 1;
     }
-    size_t neqs = 2;            /* number of equations */
-    double eps_abs = 1.e-8, eps_rel = 0.;       /* desired precision */
-    double stepsize = 1e-6;     /* initial integration step */
-    double omega = (double) atoi(argv[1]);
-    double t = 0., t1 = 100.;   /* time interval */
+    size_t neqs = 2;                        /* number of equations */
+    double eps_abs = 1.e-8, eps_rel = 0.;   /* desired precision */
+    double stepsize = 1e-6;					/* initial integration step */
+    double omega = (double) atoi(argv[1]);  /* take the value of omega from the command line argument */
+    double t = 0., t1 = 100.;				/* time interval */
     int status;
     /*
      * Initial conditions
@@ -31,10 +34,8 @@ int main (int argc, char *argv[])
      * This method is a good general-purpose integrator.
      */
     gsl_odeiv2_step *s = gsl_odeiv2_step_alloc (gsl_odeiv2_step_rkf45, neqs);
-    gsl_odeiv2_control *c = gsl_odeiv2_control_y_new (eps_abs,
-                                                      eps_rel);
+    gsl_odeiv2_control *c = gsl_odeiv2_control_y_new (eps_abs, eps_rel);
     gsl_odeiv2_evolve *e = gsl_odeiv2_evolve_alloc (neqs);
-
     gsl_odeiv2_system sys = { func, NULL, neqs, &omega };
 
     /*
@@ -42,8 +43,7 @@ int main (int argc, char *argv[])
      */
     while ((t < t1) && (y[1] < M_PI))
     {
-        status =
-            gsl_odeiv2_evolve_apply (e, c, s, &sys, &t, t1, &stepsize, y);
+        status = gsl_odeiv2_evolve_apply (e, c, s, &sys, &t, t1, &stepsize, y);
         if (status != GSL_SUCCESS)
         {
             printf ("Troubles: % .5e  % .5e  % .5e\n", t, y[0], y[1]);

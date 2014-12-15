@@ -1,3 +1,7 @@
+/*
+ * Approximate the volume of 5-dimensional superellipsoids with exponents of 1 through 9 
+ * using the monte carlo method. 
+ */
 #include <stdio.h>
 
 #include <gsl/gsl_rng.h>
@@ -38,6 +42,7 @@ int main(void)
             p *= 2;
         }
         printf("%d  %10.8f   %10.8f\n", n, mean, sd);
+        /* reset the standard deviation and the number of points at each iteration */
         sd = 1;
         p = POINTS;
     }

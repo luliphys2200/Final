@@ -1,3 +1,5 @@
+/* Estimate the value of pi^4/90 with relative error less than 3 times machine epsilon. */
+
 #include <stdio.h>
 #include <math.h>
 
@@ -9,7 +11,8 @@ int main(void)
     float exact = pow(M_PI, 4.)/90.;
     int n = 5;
     int k;
-
+    
+    /* find machine epsilon */
     while((float)(1. + macheps) != 1.)
     {
         macheps /= 2;
@@ -17,7 +20,8 @@ int main(void)
 
     printf("macheps = %g\n", macheps);
     errmax = 3*macheps;
-
+    
+    /* keep summing until the error is less than 3*macheps */
     while(err >= errmax)
     {
         s = 0;

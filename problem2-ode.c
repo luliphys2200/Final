@@ -1,3 +1,6 @@
+/*
+ * find the angle and change in the angle of a pendulum in motion
+ */
 #include <stdio.h>
 #include <math.h>
 
